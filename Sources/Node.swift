@@ -20,6 +20,12 @@ public enum Node: CustomStringConvertible {
             return t
         }
     }
+    
+    public mutating func addChildren(_ nodes: [Node]) {
+        if case var .element(e) = self {
+            self = .element(e.addChildren(nodes))
+        }
+    }
 }
 
 extension Node: ExpressibleByStringLiteral {
