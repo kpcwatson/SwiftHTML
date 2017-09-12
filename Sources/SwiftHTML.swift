@@ -16,7 +16,7 @@ public class HTML: HTMLStringConvertible {
     let body: Node
     
     public var description: String {
-        return String(describing: node("html", [head, body]))
+        return "<!doctype html>" + String(describing: node("html", [], [head, body]))
     }
     
     public init(_ head: Node, _ body: Node) {

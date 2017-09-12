@@ -34,6 +34,10 @@ public struct AttributeKey<A> {
 }
 
 infix operator =>
+public func => (key: String, value: String) -> Attribute {
+    return .init(key, value)
+}
+
 public func => <A> (key: AttributeKey<A>, value: A) -> Attribute {
     return .init(key.key, "\(value)")
 }
