@@ -8,22 +8,24 @@
 
 import Foundation
 
-public enum Node: CustomStringConvertible {
+public enum Node {
     case element(Element)
     case text(String)
     
+    public mutating func addChildren(_ nodes: [Node]) {
+        if case var .element(e) = self {
+            self = .element(e.addChildren(nodes))
+        }
+    }
+}
+
+extension Node: CustomStringConvertible {
     public var description: String {
         switch self {
         case let .element(e):
             return String(describing: e)
         case let .text(t):
             return t
-        }
-    }
-    
-    public mutating func addChildren(_ nodes: [Node]) {
-        if case var .element(e) = self {
-            self = .element(e.addChildren(nodes))
         }
     }
 }

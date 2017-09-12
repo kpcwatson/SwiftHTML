@@ -12,17 +12,19 @@ public let id = AttributeKey<String>("id")
 public let href = AttributeKey<String>("href")
 public let src = AttributeKey<String>("src")
 
-public struct Attribute: CustomStringConvertible {
+public struct Attribute {
     let key: String
     let value: String
-    
-    public var description: String {
-        return "\(key)=\"\(value)\""
-    }
     
     public init(_ key: String, _ value: String) {
         self.key = key
         self.value = value
+    }
+}
+
+extension Attribute: CustomStringConvertible {
+    public var description: String {
+        return "\(key)=\"\(value)\""
     }
 }
 

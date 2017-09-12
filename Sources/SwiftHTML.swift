@@ -9,21 +9,20 @@
 import Foundation
 
 public protocol SwiftHTML {}
-public protocol HTMLStringConvertible: SwiftHTML, CustomStringConvertible { }
 
-public class HTML: HTMLStringConvertible {
+public class HTML: SwiftHTML {
     let head: Node
     let body: Node
-    
-    private let doctype = "<!doctype html>"
-    
-    public var description: String {
-        return doctype + String(describing: node("html", [head, body]))
-    }
     
     public init(_ head: Node, _ body: Node) {
         self.head = head
         self.body = body
+    }
+}
+
+extension HTML: CustomStringConvertible {
+    public var description: String {
+        return "<!doctype html>" + String(describing: node("html", [head, body]))
     }
 }
 

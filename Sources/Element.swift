@@ -8,21 +8,10 @@
 
 import Foundation
 
-public struct Element: CustomStringConvertible {
+public struct Element {
     let name: String
     let attributes: [Attribute]
     var children: [Node]?
-    
-    public var description: String {
-        let openTagWithAttrs = "<\(name)"
-            + (attributes.isEmpty ? "" : " ")
-            + attributes.map { String(describing: $0) }.joined(separator: " ")
-            + (children == nil ? "" : ">\n")
-        let nestedChildren = (children ?? []).map { String(describing: $0) }.joined()
-        let closeTag = children == nil ? "/>\n" : "</\(name)>\n"
-        
-        return openTagWithAttrs + nestedChildren + closeTag
-    }
     
     public init(_ name: String, _ attributes: [Attribute], _ children: [Node]?) {
         self.name = name
@@ -37,5 +26,18 @@ public struct Element: CustomStringConvertible {
             children?.append(contentsOf: nodes)
         }
         return self
+    }
+}
+
+extension Element: CustomStringConvertible {
+    public var description: String {
+        let openTagWithAttrs = "<\(name)"
+            + (attributes.isEmpty ? "" : " ")
+            + attributes.map { String(describing: $0) }.joined(separator: " ")
+            + (children == nil ? "" : ">\n")
+        let nestedChildren = (children ?? []).map { String(describing: $0) }.joined()
+        let closeTag = children == nil ? "/>\n" : "</\(name)>\n"
+        
+        return openTagWithAttrs + nestedChildren + closeTag
     }
 }
