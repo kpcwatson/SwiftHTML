@@ -11,13 +11,7 @@ import Foundation
 public struct Element: CustomStringConvertible {
     let name: String
     let attributes: [Attribute]
-    let children: [Node]?
-    
-    public init(_ name: String, _ attributes: [Attribute], _ children: [Node]?) {
-        self.name = name
-        self.attributes = attributes
-        self.children = children
-    }
+    var children: [Node]?
     
     public var description: String {
         let openTagWithAttrs = "<\(name)"
@@ -28,5 +22,20 @@ public struct Element: CustomStringConvertible {
         let closeTag = children == nil ? "/>" : "</\(name)>"
         
         return openTagWithAttrs + nestedChildren + closeTag
+    }
+    
+    public init(_ name: String, _ attributes: [Attribute], _ children: [Node]?) {
+        self.name = name
+        self.attributes = attributes
+        self.children = children
+    }
+    
+    public mutating func addChildren(_ nodes: [Node]) -> Element {
+        if children == nil {
+            children = nodes
+        } else {
+            children?.append(contentsOf: nodes)
+        }
+        return self
     }
 }

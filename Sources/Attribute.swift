@@ -16,13 +16,13 @@ public struct Attribute: CustomStringConvertible {
     let key: String
     let value: String
     
+    public var description: String {
+        return "\(key)=\"\(value)\""
+    }
+    
     public init(_ key: String, _ value: String) {
         self.key = key
         self.value = value
-    }
-    
-    public var description: String {
-        return "\(key)=\"\(value)\""
     }
 }
 
