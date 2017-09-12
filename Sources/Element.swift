@@ -17,9 +17,9 @@ public struct Element: CustomStringConvertible {
         let openTagWithAttrs = "<\(name)"
             + (attributes.isEmpty ? "" : " ")
             + attributes.map { String(describing: $0) }.joined(separator: " ")
-            + (children == nil ? "" : ">")
+            + (children == nil ? "" : ">\n")
         let nestedChildren = (children ?? []).map { String(describing: $0) }.joined()
-        let closeTag = children == nil ? "/>" : "</\(name)>"
+        let closeTag = children == nil ? "/>\n" : "</\(name)>\n"
         
         return openTagWithAttrs + nestedChildren + closeTag
     }
