@@ -15,8 +15,9 @@ public class HTML: HTMLStringConvertible {
     let head: Node
     let body: Node
     
+    private let doctype = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
     public var description: String {
-        return "<!doctype html>" + String(describing: node("html", [], [head, body]))
+        return doctype + String(describing: node("html", ["xmlns" => "http://www.w3.org/1999/xhtml"], [head, body]))
     }
     
     public init(_ head: Node, _ body: Node) {
