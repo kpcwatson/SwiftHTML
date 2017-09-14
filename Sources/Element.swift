@@ -34,9 +34,9 @@ extension Element: CustomStringConvertible {
         let openTagWithAttrs = "<\(name)"
             + (attributes.isEmpty ? "" : " ")
             + attributes.map { String(describing: $0) }.joined(separator: " ")
-            + (children == nil ? "" : ">\n")
+            + (children == nil ? "" : ">")
         let nestedChildren = (children ?? []).map { String(describing: $0) }.joined()
-        let closeTag = children == nil ? "/>\n" : "</\(name)>\n"
+        let closeTag = children == nil ? "/>" : "</\(name)>"
         
         return openTagWithAttrs + nestedChildren + closeTag
     }
