@@ -25,7 +25,8 @@ extension Node: CustomStringConvertible {
         case let .element(e):
             return String(describing: e)
         case let .text(t):
-            return t
+            return t.replacingOccurrences(of: "<", with: "&lt;")
+                .replacingOccurrences(of: ">", with: "&gt;")
         }
     }
 }
